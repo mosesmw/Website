@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Mwebi — Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --bg-elevated: #1a222d;
+      --text: #e7ecf1;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --border: rgba(148, 163, 184, 0.18);
+      --radius: 14px;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(56, 189, 248, 0.12), transparent 55%),
+        radial-gradient(900px 500px at 100% 20%, rgba(99, 102, 241, 0.1), transparent 50%),
+        var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    header.hero {
+      padding: 2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(145deg, var(--bg-elevated), rgba(26, 34, 45, 0.85));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, var(--accent-soft), transparent 40%);
+      pointer-events: none;
+    }
+
+    header.hero > * {
+      position: relative;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .hero-intro {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.35rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+      line-height: 1.2;
+    }
+
+    .tagline {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 42ch;
+    }
+
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      padding: 0.85rem 1.1rem;
+      background: rgba(15, 20, 25, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 100%;
+    }
+
+    @media (min-width: 720px) {
+      .hero-contact {
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 220px;
+      }
+    }
+
+    .hero-contact-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      width: 100%;
+      margin: 0 0 0.15rem;
+    }
+
+    .hero-contact-label--spaced {
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem 1rem;
+    }
+
+    .hero-contact a {
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    /* Tabbed main panel */
+    .main-panel {
+      background: rgba(26, 34, 45, 0.65);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .tablist {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.25rem;
+      padding: 0.65rem 0.65rem 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 20, 25, 0.35);
+    }
+
+    .tablist button {
+      flex: 0 0 auto;
+      appearance: none;
+      font: inherit;
+      cursor: pointer;
+      padding: 0.65rem 1.1rem;
+      border: none;
+      border-radius: 10px 10px 0 0;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .tablist button:hover {
+      color: var(--text);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .tablist button[aria-selected="true"] {
+      color: var(--text);
+      background: rgba(26, 34, 45, 0.95);
+      box-shadow: 0 -2px 0 var(--accent) inset;
+    }
+
+    .tab-panels {
+      padding: 1.35rem 1.5rem 1.5rem;
+    }
+
+    [role="tabpanel"] {
+      outline: none;
+    }
+
+    [role="tabpanel"]:focus-visible {
+      box-shadow: 0 0 0 2px var(--accent);
+      border-radius: 8px;
+    }
+
+    [role="tabpanel"][hidden] {
+      display: none;
+    }
+
+    .panel-lead {
+      margin: 0 0 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 65ch;
+    }
+
+    /* Horizontal card grids */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1.15rem 1.2rem;
+      background: rgba(15, 20, 25, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.15s;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .card .item-title {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1.02rem;
+    }
+
+    .card .company {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0.35rem 0 0.65rem;
+      line-height: 1.45;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .about-panel p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      header.hero {
+        padding: 1.5rem 1.15rem;
+      }
+
+      .hero-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="hero-intro">
+          <p class="eyebrow">Portfolio</p>
+          <h1>Vincent Mwebi</h1>
+          <p class="tagline">Technical Support &amp; Computer Science student — Eagan, MN</p>
+        </div>
+        <div class="hero-contact" aria-label="Contact, résumé, and profiles">
+          <p class="hero-contact-label">Contact</p>
+          <div class="hero-contact-links">
+            <a href="mailto:Mosesmwebi@gmail.com">Mosesmwebi@gmail.com</a>
+            <a href="tel:+16515098749">+1 (651) 509-8749</a>
+            <a href="https://www.linkedin.com/in/vincent-mwebi-375914158/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/mosesmw" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <p class="hero-contact-label hero-contact-label--spaced">Resume</p>
+          <div class="hero-contact-links">
+            <a href="{{ url_for('static', filename='Vincent_Mwebi_Resume.pdf') }}" target="_blank" rel="noopener noreferrer" download>Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-panel">
+      <div class="tablist" role="tablist" aria-label="Portfolio sections">
+        <button type="button" role="tab" id="tab-about" aria-selected="true" aria-controls="panel-about">About</button>
+        <button type="button" role="tab" id="tab-experience" aria-selected="false" aria-controls="panel-experience">Experience</button>
+        <button type="button" role="tab" id="tab-projects" aria-selected="false" aria-controls="panel-projects">Projects &amp; skills</button>
+      </div>
+      <div class="tab-panels">
+        <div role="tabpanel" id="panel-about" aria-labelledby="tab-about" tabindex="0">
+          <p class="about-panel">
+            I am a Computer Science student at Maestro College with four years of experience across
+            computer networks, helpdesk, and ticketing. I focus on device troubleshooting, security
+            practices, and remote infrastructure. Alongside IT work, I am building programming skills
+            in Python, data structures, and version control with Git and GitHub.
+          </p>
+        </div>
+        <div role="tabpanel" id="panel-experience" aria-labelledby="tab-experience" hidden tabindex="0">
+          <p class="panel-lead">Recent roles — side by side on wide screens, stacked on mobile.</p>
+          <div class="card-grid">
+            <article class="card">
+              <div class="item-title">Technical Support Associate</div>
+              <div class="company">T-Mobile · Apple Valley, MN · Jul 2024 – Jan 2026</div>
+              <p>
+                Tuned and supported high-speed home internet gateways, diagnosed OS-level mobile issues,
+                and applied security standards including MFA. Used structured troubleshooting to improve
+                customer satisfaction by 38% within the first six months.
+              </p>
+            </article>
+            <article class="card">
+              <div class="item-title">Support Technician (Remote)</div>
+              <div class="company">Minnestay · Minneapolis, MN · Feb 2022 – Jan 2024</div>
+              <p>
+                First point of contact for complex issues, resolving 95% of cases without escalation.
+                Administered Active Directory and Microsoft 365, and supported remote access, hardware, and
+                VPN to help maintain high availability for off-site staff.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div role="tabpanel" id="panel-projects" aria-labelledby="tab-projects" hidden tabindex="0">
+          <p class="panel-lead">Highlights across technical work and side projects.</p>
+          <div class="card-grid">
+            <article class="card">
+              <div class="item-title">Python &amp; algorithms</div>
+              <p>
+                Built and debugged 10+ Python scripts focused on data structures and problem solving, with
+                code managed in Git and GitHub.
+              </p>
+            </article>
+            <article class="card">
+              <div class="item-title">Homelab &amp; networking</div>
+              <p>
+                Operate personal servers for experiments and deployments, using tools like Tailscale for
+                secure remote access.
+              </p>
+            </article>
+            <article class="card">
+              <div class="item-title">Technical writing</div>
+              <p>
+                Wrote and maintained 15+ internal knowledge base articles, reducing average ticket
+                resolution time by about 20% for the support team.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var tablist = document.querySelector('[role="tablist"]');
+      if (!tablist) return;
+      var tabs = tablist.querySelectorAll('[role="tab"]');
+      var panels = document.querySelectorAll('[role="tabpanel"]');
+
+      function selectTab(selected) {
+        tabs.forEach(function (t) {
+          t.setAttribute('aria-selected', t === selected ? 'true' : 'false');
+        });
+        var panelId = selected.getAttribute('aria-controls');
+        panels.forEach(function (p) {
+          p.hidden = p.id !== panelId;
+        });
+        selected.focus();
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          selectTab(tab);
+        });
+        tab.addEventListener('keydown', function (e) {
+          var i = Array.prototype.indexOf.call(tabs, tab);
+          var next = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            next = tabs[(i + 1) % tabs.length];
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            next = tabs[(i - 1 + tabs.length) % tabs.length];
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            next = tabs[0];
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            next = tabs[tabs.length - 1];
+          }
+          if (next) selectTab(next);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
